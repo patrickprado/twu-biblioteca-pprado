@@ -8,11 +8,13 @@ public class Book {
     private final String title;
     private final String author;
     private final String yearPublished;
+    private boolean checkout;
 
-    public Book(String title, String author, String yearPublished) {
-        this.title = title;
+    public Book(String title, String author, String yearPublished, boolean checkout) {
+        this.title  = title;
         this.author = author;
         this.yearPublished = yearPublished;
+        this.checkout  = checkout;
     }
 
     public String getTitle() {
@@ -26,5 +28,9 @@ public class Book {
     public void printInfo() {
         String info = this.title + " | " + this.author + " | " +  this.yearPublished;
         System.out.println(info);
+    }
+
+    public boolean isCheckout() {
+        return this.checkout;
     }
 }

@@ -21,9 +21,9 @@ public class Biblioteca {
     }
 
     public void setBooks() {
-        books.add(new Book("A Song of Ice And Fire", "George R. R. Martin", "1996"));
-        books.add(new Book("Steve Jobs", "Walter Isaacson", "2011"));
-        books.add(new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "1979"));
+        books.add(new Book("A Song of Ice And Fire", "George R. R. Martin", "1996", false));
+        books.add(new Book("Steve Jobs", "Walter Isaacson", "2011", true));
+        books.add(new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "1979", false));
     }
 
     public List<Book> getBooks() {
@@ -34,7 +34,9 @@ public class Biblioteca {
     public void printBooksInfo() {
         System.out.println("  Book           | Author         | Year Published       ");
         for(Book b : books) {
-            b.printInfo();
+            if (!b.isCheckout()) {
+                b.printInfo();
+            }
         }
     }
 }

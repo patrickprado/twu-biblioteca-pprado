@@ -20,7 +20,7 @@ public class BookTest {
 
     @Before
     public void setUp(){
-        book = new Book("A Song of Ice and Fire", "George R. R. Martin", "1996");
+        book = new Book("A Song of Ice and Fire", "George R. R. Martin", "1996", true);
     }
 
     @Test
@@ -44,5 +44,9 @@ public class BookTest {
         assertEquals("A Song of Ice and Fire | George R. R. Martin | 1996\n", log.getLog());
     }
 
+    @Test
+    public void testCheckoutBook() {
+
+    }
 
 }
