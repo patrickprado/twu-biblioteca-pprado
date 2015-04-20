@@ -37,12 +37,13 @@ public class BibliotecaAppTest {
 
     @Test
     public void testWelcomeMessage() {
-        systemInMock.provideText("3\n");
+        systemInMock.provideText("4\n");
         bibliotecaApp.main(null);
         assertEquals("Welcome to TW Library\n" +
                 "1 - List Books\n" +
                 "2 - Checkout a book\n" +
-                "3 - Quit\n", log.getLog());
+                "3 - Return a book\n" +
+                "4 - Quit\n", log.getLog());
     }
 
     @Test
@@ -51,7 +52,8 @@ public class BibliotecaAppTest {
         bibliotecaApp.menu();
         assertEquals("1 - List Books\n" +
                      "2 - Checkout a book\n" +
-                     "3 - Quit\n", log.getLog());
+                     "3 - Return a book\n" +
+                     "4 - Quit\n", log.getLog());
     }
 
     @Test
@@ -74,6 +76,14 @@ public class BibliotecaAppTest {
         BibliotecaApp.checkoutBookFromBiblioteca(biblioteca);
         assertEquals("Please, digit a book title to checkout:\n\n" +
                      "Thank you! Enjoy the book.\n", log.getLog());
+    }
+
+    @Test
+    public void testMessageReturnBook() {
+        systemInMock.provideText("Steve Jobs\n");
+        BibliotecaApp.returnBookToBiblioteca(biblioteca);
+        assertEquals("Please, digit the book title which you are returning:\n\n" +
+                     "Thank you for returning the book.\n", log.getLog());
     }
 
 
