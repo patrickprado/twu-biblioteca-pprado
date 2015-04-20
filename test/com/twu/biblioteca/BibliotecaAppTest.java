@@ -7,6 +7,8 @@ import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import sun.jvm.hotspot.HelloWorld;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
@@ -35,11 +37,12 @@ public class BibliotecaAppTest {
 
     @Test
     public void testWelcomeMessage() {
-        systemInMock.provideText("2\n");
+        systemInMock.provideText("3\n");
         bibliotecaApp.main(null);
         assertEquals("Welcome to TW Library\n" +
-                     "1 - List Books\n" +
-                     "2 - Quit\n", log.getLog());
+                "1 - List Books\n" +
+                "2 - Checkout a book\n" +
+                "3 - Quit\n", log.getLog());
     }
 
     @Test
@@ -47,7 +50,8 @@ public class BibliotecaAppTest {
         systemInMock.provideText("1\n");
         bibliotecaApp.menu();
         assertEquals("1 - List Books\n" +
-                     "2 - Quit\n", log.getLog());
+                     "2 - Checkout a book\n" +
+                     "3 - Quit\n", log.getLog());
     }
 
     @Test
@@ -55,7 +59,6 @@ public class BibliotecaAppTest {
         BibliotecaApp.chooseOption(1, biblioteca);
         assertEquals("  Book           | Author         | Year Published       \n" +
                      "A Song of Ice And Fire | George R. R. Martin | 1996\n" +
-                     "Steve Jobs | Walter Isaacson | 2011\n" +
                      "The Hitchhiker's Guide to the Galaxy | Douglas Adams | 1979\n", log.getLog());
     }
 
@@ -63,6 +66,14 @@ public class BibliotecaAppTest {
     public void testInvalidMenuOption() {
         BibliotecaApp.chooseOption(123, biblioteca);
         assertEquals("Select a valid option!\n", log.getLog());
+    }
+
+    @Test
+    public void testMessageCheckout() {
+        systemInMock.provideText("A Song of Ice And Fire\n");
+        BibliotecaApp.checkoutBookFromBiblioteca(biblioteca);
+        assertEquals("Please, digit a book title to checkout:\n\n" +
+                     "Thank you! Enjoy the book.\n", log.getLog());
     }
 
 

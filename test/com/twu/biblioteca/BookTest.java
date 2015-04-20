@@ -5,8 +5,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by pprado on 4/17/15.
@@ -20,7 +21,7 @@ public class BookTest {
 
     @Before
     public void setUp(){
-        book = new Book("A Song of Ice and Fire", "George R. R. Martin", "1996", true);
+        book = new Book("A Song of Ice And Fire", "George R. R. Martin", "1996", true);
     }
 
     @Test
@@ -30,7 +31,7 @@ public class BookTest {
 
     @Test
     public void testBookTitleGetterAndSetter() {
-        assertEquals(book.getTitle(), "A Song of Ice and Fire");
+        assertEquals(book.getTitle(), "A Song of Ice And Fire");
     }
 
     @Test
@@ -45,8 +46,18 @@ public class BookTest {
     }
 
     @Test
-    public void testCheckoutBook() {
-
+    public void testCheckoutABook() {
+        Book bookUncheckout = new Book("Steve Jobs", "Walter Isaacson", "2011", false);
+        bookUncheckout.checkoutBook();
+        assertTrue(bookUncheckout.isCheckout());
     }
+
+    @Test
+    public void testUncheckoutABook() {
+        Book bookCheckout = new Book("A Song of Ice And Fire", "George R. R. Martin", "1996", true);
+        bookCheckout.uncheckoutBook();
+        assertFalse(bookCheckout.isCheckout());
+    }
+
 
 }

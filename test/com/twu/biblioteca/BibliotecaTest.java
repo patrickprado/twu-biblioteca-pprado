@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by pprado on 4/17/15.
@@ -42,8 +43,14 @@ public class BibliotecaTest {
     public void testPrintingBooksFromBiblioteca() {
         biblioteca.printBooksInfo();
         assertEquals("  Book           | Author         | Year Published       \n" +
-                     "A Song of Ice And Fire | George R. R. Martin | 1996\n" +
-                     "The Hitchhiker's Guide to the Galaxy | Douglas Adams | 1979\n", log.getLog());
+                "A Song of Ice And Fire | George R. R. Martin | 1996\n" +
+                "The Hitchhiker's Guide to the Galaxy | Douglas Adams | 1979\n", log.getLog());
     }
+
+    @Test
+    public void testCheckoutBook() {
+        assertTrue(biblioteca.checkoutBook("A Song of Ice And Fire"));
+    }
+
 
 }

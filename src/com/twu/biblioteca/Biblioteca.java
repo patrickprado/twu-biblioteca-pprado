@@ -39,4 +39,14 @@ public class Biblioteca {
             }
         }
     }
+
+    public boolean checkoutBook(String bookTitle) {
+        for(Book b : books) {
+            if(b.getTitle().equals(bookTitle) && !b.isCheckout()) {
+                b.checkoutBook();
+                return true;
+            }
+        }
+        return false;
+    }
 }

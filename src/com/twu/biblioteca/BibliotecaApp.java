@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import sun.text.bidi.BidiLine;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,23 +22,49 @@ public class BibliotecaApp {
     static void chooseOption(int optionMenu, Biblioteca biblioteca) {
         switch (optionMenu) {
             case 1: listBooks(biblioteca);
-                break;
-            case 2: quit = true;
-                break;
+                    break;
+            case 2: checkoutBookFromBiblioteca(biblioteca);
+                    break;
+            case 3: quit = true;
+                    break;
             default: System.out.println("Select a valid option!");
-                break;
+                    break;
         }
     }
 
     public static int menu() {
         System.out.println("1 - List Books");
-        System.out.println("2 - Quit");
+        System.out.println("2 - Checkout a book");
+        System.out.println("3 - Quit");
+
         Scanner scanner = new Scanner(System.in);
-        return Integer.parseInt(scanner.next());
+        if(scanner.hasNext()) {
+            return Integer.parseInt(scanner.next());
+        }
+        return 2;
     }
 
     private static void listBooks(Biblioteca biblioteca) {
         biblioteca.printBooksInfo();
+    }
+
+    public static void checkoutBookFromBiblioteca(Biblioteca biblioteca) {
+        System.out.println("Please, digit a book title to checkout:\n");
+        Scanner scanner = new Scanner(System.in);
+        Boolean checkoutConfirmed = false;
+        if(scanner.hasNextLine()) {
+            checkoutConfirmed = biblioteca.checkoutBook(scanner.nextLine());
+        }
+        messageCheckout(checkoutConfirmed);
+    }
+
+    public static void messageCheckout(Boolean checkoutConfirmed) {
+        if(checkoutConfirmed) {
+            System.out.println("Thank you! Enjoy the book.");
+        }
+        else {
+            System.out.println("That book is not available.");
+        }
     }
 
 }

@@ -18,7 +18,7 @@ public class Book {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public String getAuthor() {
@@ -32,5 +32,13 @@ public class Book {
 
     public boolean isCheckout() {
         return this.checkout;
+    }
+
+    public void checkoutBook() {
+        this.checkout = true;
+    }
+
+    public void uncheckoutBook() {
+        this.checkout = false;
     }
 }
