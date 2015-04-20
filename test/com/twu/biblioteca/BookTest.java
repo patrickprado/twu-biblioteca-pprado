@@ -1,7 +1,9 @@
 package com.twu.biblioteca;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,11 +13,14 @@ import static org.junit.Assert.assertNotNull;
  */
 public class BookTest {
 
-    Book book;
+    private Book book;
+
+    @Rule
+    public final StandardOutputStreamLog log = new StandardOutputStreamLog();
 
     @Before
     public void setUp(){
-        book = new Book();
+        book = new Book("A Song of Ice and Fire", "George R. R. Martin", "1996");
     }
 
     @Test
@@ -25,14 +30,18 @@ public class BookTest {
 
     @Test
     public void testBookTitleGetterAndSetter() {
-        book.setTitle("A Song of Ice and Fire");
         assertEquals(book.getTitle(), "A Song of Ice and Fire");
     }
 
     @Test
     public void testBookAuthorGetterSetter() {
-        book.setAuthor("George R. R. Martin");
         assertEquals(book.getAuthor(), "George R. R. Martin");
+    }
+
+    @Test
+    public void testPrintBookInfo() {
+        book.printInfo();
+        assertEquals("A Song of Ice and Fire | George R. R. Martin | 1996\n", log.getLog());
     }
 
 

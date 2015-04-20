@@ -5,22 +5,26 @@ package com.twu.biblioteca;
  */
 public class Book {
 
-    String title;
-    String author;
+    private final String title;
+    private final String author;
+    private final String yearPublished;
 
-    public void setTitle(String title) {
+    public Book(String title, String author, String yearPublished) {
         this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getAuthor() {
         return author;
+    }
+
+    public void printInfo() {
+        String info = this.title + " | " + this.author + " | " +  this.yearPublished;
+        System.out.println(info);
     }
 }
