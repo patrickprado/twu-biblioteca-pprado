@@ -32,7 +32,7 @@ public class Biblioteca {
 
 
     public void printBooksInfo() {
-        System.out.println("  Book           | Author         | Year Published       |");
+        System.out.println("  Book           | Author         | Year Published       ");
         for(Book b : books) {
             b.printInfo();
         }

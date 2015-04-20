@@ -41,7 +41,7 @@ public class BibliotecaTest {
     @Test
     public void testPrintingBooksFromBiblioteca() {
         biblioteca.printBooksInfo();
-        assertEquals("  Book           | Author         | Year Published       |\n" +
+        assertEquals("  Book           | Author         | Year Published       \n" +
                      "A Song of Ice And Fire | George R. R. Martin | 1996\n" +
                      "Steve Jobs | Walter Isaacson | 2011\n" +
                      "The Hitchhiker's Guide to the Galaxy | Douglas Adams | 1979\n", log.getLog());
