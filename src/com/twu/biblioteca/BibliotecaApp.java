@@ -63,10 +63,10 @@ public class BibliotecaApp {
         Scanner scanner = new Scanner(System.in);
         Boolean operationConfirmed = false;
         if(scanner.hasNextLine()) {
-            if(operation == Constants.CHECKOUT) {
+            if(operation.equals(Constants.CHECKOUT)) {
                 operationConfirmed = biblioteca.checkoutBook(scanner.nextLine());
             }
-            else if(operation == Constants.RETURN) {
+            else if(operation.equals(Constants.RETURN)) {
                 operationConfirmed = biblioteca.returnBookToRack(scanner.nextLine());
             }
         }
