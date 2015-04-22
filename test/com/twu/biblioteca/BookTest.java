@@ -42,7 +42,7 @@ public class BookTest {
     @Test
     public void testPrintBookInfo() {
         book.printInfo();
-        assertEquals("A Song of Ice and Fire | George R. R. Martin | 1996\n", log.getLog());
+        assertEquals("A Song of Ice And Fire | George R. R. Martin | 1996\n", log.getLog());
     }
 
     @Test

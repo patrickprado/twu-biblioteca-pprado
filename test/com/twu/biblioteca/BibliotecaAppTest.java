@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.sun.tools.internal.jxc.ap.Const;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 public class BibliotecaAppTest {
@@ -73,17 +75,13 @@ public class BibliotecaAppTest {
     @Test
     public void testMessageCheckout() {
         systemInMock.provideText("A Song of Ice And Fire\n");
-        BibliotecaApp.checkoutBookFromBiblioteca(biblioteca);
-        assertEquals("Please, digit a book title to checkout:\n\n" +
-                     "Thank you! Enjoy the book.\n", log.getLog());
+        assertTrue(BibliotecaApp.operateBookFromBiblioteca(biblioteca, Constants.CHECKOUT));
     }
 
     @Test
     public void testMessageReturnBook() {
         systemInMock.provideText("Steve Jobs\n");
-        BibliotecaApp.returnBookToBiblioteca(biblioteca);
-        assertEquals("Please, digit the book title which you are returning:\n\n" +
-                     "Thank you for returning the book.\n", log.getLog());
+        assertTrue(BibliotecaApp.operateBookFromBiblioteca(biblioteca, Constants.RETURN));
     }
 
 

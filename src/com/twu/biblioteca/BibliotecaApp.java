@@ -23,13 +23,17 @@ public class BibliotecaApp {
         switch (optionMenu) {
             case 1: listBooks(biblioteca);
                     break;
-            case 2: checkoutBookFromBiblioteca(biblioteca);
+            case 2: System.out.println(Constants.CHECKOUT_BOOK_MESSAGE);
+                    boolean checkoutConfirmed = operateBookFromBiblioteca(biblioteca, Constants.CHECKOUT);
+                    messageCheckout(checkoutConfirmed);
                     break;
-            case 3: returnBookToBiblioteca(biblioteca);
+            case 3: System.out.println(Constants.RETURN_BOOK_MESSAGE);
+                    boolean returnConfirmed = operateBookFromBiblioteca(biblioteca, Constants.RETURN);
+                    messageReturnBook(returnConfirmed);
                     break;
             case 4: quit = true;
                     break;
-            default: System.out.println("Select a valid option!");
+            default: System.out.println(Constants.SELECT_A_VALID_OPTION);
                     break;
         }
     }
@@ -42,52 +46,49 @@ public class BibliotecaApp {
 
         Scanner scanner = new Scanner(System.in);
         if(scanner.hasNext()) {
-            return Integer.parseInt(scanner.next());
+            try {
+                return Integer.parseInt(scanner.next());
+            } catch(NumberFormatException e) {
+                return 0;
+            }
         }
-        return 2;
+        return 4;
     }
 
     private static void listBooks(Biblioteca biblioteca) {
         biblioteca.printBooksInfo();
     }
 
-    public static void checkoutBookFromBiblioteca(Biblioteca biblioteca) {
-        System.out.println("Please, digit a book title to checkout:\n");
+    public static boolean operateBookFromBiblioteca(Biblioteca biblioteca, String operation) {
         Scanner scanner = new Scanner(System.in);
-        Boolean checkoutConfirmed = false;
+        Boolean operationConfirmed = false;
         if(scanner.hasNextLine()) {
-            checkoutConfirmed = biblioteca.checkoutBook(scanner.nextLine());
+            if(operation == Constants.CHECKOUT) {
+                operationConfirmed = biblioteca.checkoutBook(scanner.nextLine());
+            }
+            else if(operation == Constants.RETURN) {
+                operationConfirmed = biblioteca.returnBookToRack(scanner.nextLine());
+            }
         }
-        messageCheckout(checkoutConfirmed);
+        return operationConfirmed;
     }
 
     public static void messageCheckout(Boolean checkoutConfirmed) {
         if(checkoutConfirmed) {
-            System.out.println("Thank you! Enjoy the book.");
+            System.out.println(Constants.CHECKOUT_BOOK_CONFIRMED_MESSAGE);
         }
         else {
-            System.out.println("That book is not available.");
+            System.out.println(Constants.CHECKOUT_BOOK_UNCONFIRMED_MESSAGE);
         }
-    }
-
-    public static void returnBookToBiblioteca(Biblioteca biblioteca) {
-        System.out.println("Please, digit the book title which you are returning:\n");
-        Scanner scanner = new Scanner(System.in);
-        Boolean returnConfirmed = false;
-        if(scanner.hasNextLine()) {
-            returnConfirmed = biblioteca.returnBookToRack(scanner.nextLine());
-        }
-        messageReturnBook(returnConfirmed);
     }
 
     public static void messageReturnBook(Boolean returnConfirmed) {
         if(returnConfirmed) {
-            System.out.println("Thank you for returning the book.");
+            System.out.println(Constants.RETURN_BOOK_CONFIRMED_MESSAGE);
         }
         else {
-            System.out.println("That is not a valid book to return.");
+            System.out.println(Constants.RETURN_BOOK_UNCONFIRMED_MESSAGE);
         }
     }
-
 
 }
