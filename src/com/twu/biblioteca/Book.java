@@ -1,24 +1,19 @@
 package com.twu.biblioteca;
 
-/**
- * Created by pprado on 4/17/15.
- */
-public class Book {
+public class Book extends Checkable {
 
-    private final String title;
     private final String author;
     private final String yearPublished;
-    private boolean checkout;
 
-    public Book(String title, String author, String yearPublished, boolean checkout) {
-        this.title  = title;
-        this.author = author;
+    public Book(String title, String author, String yearPublished, User checkedTo) {
+        this.identifier    = title;
+        this.author        = author;
         this.yearPublished = yearPublished;
-        this.checkout  = checkout;
+        this.checkedTo     = checkedTo;
     }
 
     public String getTitle() {
-        return this.title;
+        return this.identifier;
     }
 
     public String getAuthor() {
@@ -26,19 +21,7 @@ public class Book {
     }
 
     public void printInfo() {
-        String info = this.title + " | " + this.author + " | " +  this.yearPublished;
+        String info = this.identifier + " | " + this.author + " | " +  this.yearPublished;
         System.out.println(info);
-    }
-
-    public boolean isCheckout() {
-        return this.checkout;
-    }
-
-    public void checkoutBook() {
-        this.checkout = true;
-    }
-
-    public void uncheckoutBook() {
-        this.checkout = false;
     }
 }

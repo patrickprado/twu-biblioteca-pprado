@@ -5,13 +5,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 
-import java.util.List;
-
 import static org.junit.Assert.*;
 
-/**
- * Created by pprado on 4/17/15.
- */
+
 public class BookTest {
 
     private Book book;
@@ -21,7 +17,7 @@ public class BookTest {
 
     @Before
     public void setUp(){
-        book = new Book("A Song of Ice And Fire", "George R. R. Martin", "1996", true);
+        book = new Book("A Song of Ice And Fire", "George R. R. Martin", "1996", null);
     }
 
     @Test
@@ -47,16 +43,18 @@ public class BookTest {
 
     @Test
     public void testCheckoutABook() {
-        Book bookUncheckout = new Book("Steve Jobs", "Walter Isaacson", "2011", false);
-        bookUncheckout.checkoutBook();
-        assertTrue(bookUncheckout.isCheckout());
+        Book bookUncheckout = new Book("Steve Jobs", "Walter Isaacson", "2011", null);
+        User user = new User("123-4567", "pass", "Patrick", "pprado@thoughtworks.com", "1234-1234");
+        bookUncheckout.checkOut(user);
+        assertTrue(bookUncheckout.isCheckedOut());
+        assertEquals(bookUncheckout.getCheckedTo(), user);
     }
 
     @Test
     public void testUncheckoutABook() {
-        Book bookCheckout = new Book("A Song of Ice And Fire", "George R. R. Martin", "1996", true);
-        bookCheckout.uncheckoutBook();
-        assertFalse(bookCheckout.isCheckout());
+        Book bookCheckout = new Book("A Song of Ice And Fire", "George R. R. Martin", "1996", null);
+        bookCheckout.checkIn();
+        assertFalse(bookCheckout.isCheckedOut());
     }
 
 

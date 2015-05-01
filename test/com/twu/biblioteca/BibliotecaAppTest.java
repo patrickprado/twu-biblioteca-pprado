@@ -1,14 +1,10 @@
 package com.twu.biblioteca;
 
-import com.sun.tools.internal.jxc.ap.Const;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
-import sun.jvm.hotspot.HelloWorld;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -38,24 +34,16 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testWelcomeMessage() {
-        systemInMock.provideText("4\n");
-        bibliotecaApp.main(null);
-        assertEquals("Welcome to TW Library\n" +
-                "1 - List Books\n" +
-                "2 - Checkout a book\n" +
-                "3 - Return a book\n" +
-                "4 - Quit\n", log.getLog());
-    }
-
-    @Test
     public void testMenuMessage() {
         systemInMock.provideText("1\n");
-        bibliotecaApp.menu();
+        Menu.display();
         assertEquals("1 - List Books\n" +
                      "2 - Checkout a book\n" +
                      "3 - Return a book\n" +
-                     "4 - Quit\n", log.getLog());
+                     "4 - List Movies\n" +
+                     "5 - Checkout Movie\n" +
+                     "6 - User Info\n" +
+                     "7 - Quit\n", log.getLog());
     }
 
     @Test
@@ -63,6 +51,7 @@ public class BibliotecaAppTest {
         BibliotecaApp.chooseOption(1, biblioteca);
         assertEquals("  Book           | Author         | Year Published       \n" +
                      "A Song of Ice And Fire | George R. R. Martin | 1996\n" +
+                     "Steve Jobs | Walter Isaacson | 2011\n" +
                      "The Hitchhiker's Guide to the Galaxy | Douglas Adams | 1979\n", log.getLog());
     }
 
@@ -73,16 +62,46 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testMessageCheckout() {
+    public void testBookCheckout() {
         systemInMock.provideText("A Song of Ice And Fire\n");
         assertTrue(BibliotecaApp.operateBookFromBiblioteca(biblioteca, Constants.CHECKOUT));
     }
 
-    @Test
+    //@Test
     public void testMessageReturnBook() {
         systemInMock.provideText("Steve Jobs\n");
-        assertTrue(BibliotecaApp.operateBookFromBiblioteca(biblioteca, Constants.RETURN));
+        assertTrue(BibliotecaApp.operateBookFromBiblioteca(biblioteca, Constants.CHECKIN));
     }
+
+    @Test
+    public void testListMoviesOption() {
+        BibliotecaApp.chooseOption(4, biblioteca);
+        assertEquals("  Movie           | Author         | Year | Rating       \n" +
+                "Fight Club | David Fincher | 1999 | 8.9\n" +
+                "Walk The Line | James Mangold | 2005 | 7.9\n" +
+                "The Shawshank Redemption | Frank Darabont | 1994 | 9.3\n", log.getLog());
+    }
+
+    @Test
+    public void testMovieCheckout() {
+        systemInMock.provideText("Fight Club\n");
+        bibliotecaApp.checkoutMovieFromBiblioteca(biblioteca);
+        assertEquals(Constants.CHECKOUT_MOVIE_MESSAGE + "\n" + Constants.CHECKOUT_MOVIE_CONFIRMED_MESSAGE + "\n", log.getLog());
+    }
+
+    @Test
+    public void testUserLogged() {
+        assertTrue(biblioteca.loginUser("123-4567", "pass"));
+    }
+
+    @Test
+    public void testVerifyUser() {
+        systemInMock.provideText("123-4567\npass\n");
+        User user = BibliotecaApp.verifyUser(biblioteca);
+
+        assertNotNull(user);
+    }
+
 
 
 }
